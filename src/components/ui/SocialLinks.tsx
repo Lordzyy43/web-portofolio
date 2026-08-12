@@ -12,6 +12,9 @@ const socialLabels = {
 
 export function SocialLinks({ align = "left" }: SocialLinksProps) {
   const isCenter = align === "center";
+  const visibleSocials = Object.entries(profile.socials).filter(([, url]) => {
+    return url && !url.includes("yourusername");
+  });
 
   return (
     <div
@@ -19,7 +22,7 @@ export function SocialLinks({ align = "left" }: SocialLinksProps) {
         isCenter ? "justify-center" : "justify-start"
       }`}
     >
-      {Object.entries(profile.socials).map(([key, url]) => (
+      {visibleSocials.map(([key, url]) => (
         <a
           key={key}
           href={url}

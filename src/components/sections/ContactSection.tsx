@@ -11,8 +11,8 @@ export function ContactSection() {
         <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
           <SectionTitle
             label="Contact"
-            title="Let's build something together."
-            description="Feel free to reach out for collaboration, project discussion, or learning opportunities."
+            title="If the work feels right, let's talk."
+            description="Reach out for collaboration, portfolio feedback, project discussion, or anything creative and practical."
             align="center"
           />
 

@@ -14,9 +14,20 @@ export type Project = {
   status: ProjectStatus;
   featured: boolean;
   year: string;
+  role?: string;
   summary: string;
   description: string;
   tech: string[];
+  context?: string;
+  challenge?: string;
+  approach?: string;
+  impact?: string;
+  highlights?: string[];
+  links?: {
+    label: string;
+    url: string;
+    target?: "_blank" | "_self";
+  }[];
   githubUrl?: string;
   liveUrl?: string;
   image?: string;
