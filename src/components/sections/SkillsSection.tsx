@@ -9,8 +9,8 @@ export function SkillsSection() {
       <Container>
         <SectionTitle
           label="Skills"
-          title="Technologies I'm learning and using."
-          description="A collection of technologies and tools I use to build web and mobile applications."
+          title="Tools and technologies I keep reaching for."
+          description="A practical stack for web and mobile work, with enough flexibility to move from prototypes to polished interfaces."
         />
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">

@@ -2,14 +2,14 @@ export const profile = {
   name: "Muriddkuu",
   role: "Web & Mobile Developer",
   location: "Indonesia",
-  email: "your.email@example.com",
+  email: "lordz0990@gmail.com",
   headline:
-    "I build clean, responsive, and user-friendly digital products using modern web and mobile technologies.",
+    "I design and build clean web and mobile products with a focus on clear structure, responsive UI, and practical user flows.",
   about:
-    "I am an Informatics student currently focusing on web development and mobile development. I enjoy learning project architecture, UI/UX, and turning ideas into real applications using technologies like Next.js, Flutter, and Tailwind CSS.",
+    "I am an Informatics student based in Indonesia who is focused on web and mobile development. I enjoy turning ideas into real applications, learning how product architecture works, and shaping interfaces with technologies like Next.js, Flutter, and Tailwind CSS.",
   socials: {
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
-    instagram: "https://instagram.com/yourusername",
+    github: "https://github.com/Lordzyy43",
+    linkedin: "",
+    instagram: "",
   },
 };

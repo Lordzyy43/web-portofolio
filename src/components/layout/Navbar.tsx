@@ -1,5 +1,6 @@
 "use client";
 
+  import Link from "next/link";
 import { useState } from "react";
 import { navLinks } from "@/data/navLinks";
 import { profile } from "@/data/profile";
@@ -19,14 +20,10 @@ export function Navbar() {
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur">
       <Container className="flex items-center justify-between py-4">
-        <a
-          href="/"
-          className="text-lg font-bold text-white"
-          onClick={closeMenu}
-        >
+        <Link href="/" className="text-lg font-bold text-white" onClick={closeMenu}>
           {profile.name}
           <span className="text-cyan-400">.</span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
           {navLinks.map((link) => (

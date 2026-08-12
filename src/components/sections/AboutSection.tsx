@@ -8,7 +8,7 @@ export function AboutSection() {
       <Container>
         <SectionTitle
           label="About Me"
-          title="Informatics student who loves building digital products."
+          title="I like building products that feel intentional, not generic."
           description={profile.about}
         />
       </Container>

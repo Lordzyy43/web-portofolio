@@ -13,8 +13,8 @@ export function ProjectsSection() {
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionTitle
             label="Projects"
-            title="Selected projects."
-            description="A collection of projects that represent my learning journey, technical growth, and ability to build real-world digital products."
+            title="A few selected case studies."
+            description="These projects show how I think about product structure, visual clarity, and implementation choices across web and mobile work."
           />
 
           <div className="shrink-0">
