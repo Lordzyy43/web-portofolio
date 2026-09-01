@@ -1,5 +1,7 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ReactLenis } from "@/lib/lenis"; // Impor mesin scroll premium kita
 import "./globals.css";
 
 const geistSans = Geist({
@@ -58,18 +60,24 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="relative isolate flex min-h-full flex-col overflow-x-hidden bg-[#050816] text-white">
+      <body className="relative isolate flex min-h-full flex-col overflow-x-hidden bg-background text-foreground selection:bg-white/20 selection:text-white">
+        {/* Efek Spotlight Halus */}
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,0.15),_transparent_32%),radial-gradient(circle_at_top_right,_rgba(59,130,246,0.12),_transparent_28%),linear-gradient(180deg,_rgba(5,8,22,0.92),_rgba(5,8,22,1))]"
+          className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(255,255,255,0.08),transparent)]"
         />
+
+        {/* Efek Grid Modern */}
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)] opacity-35"
+          className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"
         />
-        {children}
+
+        {/* Bungkus seluruh aplikasi dengan Smooth Scroll */}
+        <ReactLenis>{children}</ReactLenis>
       </body>
     </html>
   );
