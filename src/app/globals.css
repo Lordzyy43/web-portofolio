@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
+/* Tema Minimalis & Profesional (Vercel/Shadcn Style) 
+  Menggunakan palet Zinc/Neutral sebagai kanvas.
+*/
 :root {
-  --background: #050816;
-  --foreground: #e6eefc;
+  --background: #09090b;
+  --foreground: #fafafa;
+
+  /* Warna seleksi teks yang lebih natural (abu-abu transparan) */
+  --selection-bg: rgba(255, 255, 255, 0.15);
+  --selection-text: #ffffff;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #ffffff;
+    --foreground: #09090b;
+    --selection-bg: rgba(0, 0, 0, 0.15);
+    --selection-text: #000000;
+  }
 }
 
 @theme inline {
@@ -12,21 +28,74 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html {
-  scroll-behavior: smooth;
+/* ==========================================
+   KONFIGURASI WAJIB LENIS (SMOOTH SCROLL)
+   ========================================== */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
+
+/* Mematikan smooth scroll bawaan CSS agar tidak bentrok dengan Lenis */
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+/* ========================================== */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, sans-serif;
+
+  /* Trik tipografi modern */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Mencegah efek pantulan (rubber-band) di ujung halaman pada trackpad Mac/iOS */
+  overscroll-behavior-y: none;
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.24);
-  color: #ffffff;
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 section[id] {
-  scroll-margin-top: 7rem;
+  /* Memberikan ruang di atas section agar tidak tertutup Navbar saat di-klik */
+  scroll-margin-top: 8rem;
+}
+
+/* ==========================================
+   CUSTOM SCROLLBAR PREMIUM
+   Mengganti scrollbar abu-abu tebal Windows
+   dengan desain tipis transparan.
+   ========================================== */
+::-webkit-scrollbar {
+  width: 6px; /* Sangat tipis */
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

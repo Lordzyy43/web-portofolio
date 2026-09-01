@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { projects } from "@/data/projects";
+import { getProjectsSorted } from "@/data/projects";
 import { Container } from "@/components/ui/Container";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -25,6 +25,8 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
+  const projects = getProjectsSorted();
+
   return (
     <main className="relative min-h-screen pt-28 text-white">
       <section className="py-16">

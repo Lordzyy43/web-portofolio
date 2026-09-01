@@ -137,8 +137,31 @@ export const projects: Project[] = [
   },
 ];
 
+const projectOrder = [
+  "revora-platform",
+  "website-booking-lapangan",
+  "portfolio-website",
+  "e-learning",
+];
+
+function getProjectOrderIndex(slug: string) {
+  const index = projectOrder.indexOf(slug);
+
+  return index === -1 ? Number.POSITIVE_INFINITY : index;
+}
+
 export function getAllProjects() {
   return projects;
+}
+
+export function getProjectsSorted() {
+  return [...projects].sort((leftProject, rightProject) => {
+    return getProjectOrderIndex(leftProject.slug) - getProjectOrderIndex(rightProject.slug);
+  });
+}
+
+export function getFeaturedProjects() {
+  return getProjectsSorted().filter((project) => project.featured);
 }
 
 export function getProjectBySlug(slug: string) {
