@@ -26,21 +26,22 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1, // Dikurangi sedikit agar lebih responsif saat di-scroll
+        staggerChildren: 0.12, // Dipercepat sedikit dari 0.15
+        delayChildren: 0, // Dihilangkan delay awalnya agar langsung jalan
       },
     },
   };
 
   const itemVariants = {
-    // Memperbesar scale awal dan blur agar efek "muncul"-nya lebih dramatis
-    hidden: { opacity: 0, y: 50, scale: 0.9, filter: "blur(12px)" },
+    // Blur awal dikurangi (12px -> 4px) agar tidak terlihat blank putih saat proses load lambat
+    hidden: { opacity: 0, y: 30, scale: 0.95, filter: "blur(4px)" },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       filter: "blur(0px)",
-      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+      // Durasi dipersingkat (1.2 -> 0.8) agar website terasa lebih responsif (snappy)
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -81,15 +82,15 @@ export function HeroSection() {
       </motion.div>
 
       <Container className="relative z-10 flex flex-col items-center text-center">
-        {/* Menggunakan whileInView menggantikan animate.
-          viewport={{ once: false, amount: 0.2 }} -> Akan diputar ulang setiap kali 
-          elemen ini masuk ke layar sebanyak 20%.
+        {/* 
+          FIX: viewport={{ once: true }} 
+          Agar animasi hero hanya terpicu 1x saat load, mencegah repetisi yang mengganggu.
         */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ false: true, margin: "-50px" }}
           className="flex w-full max-w-4xl flex-col items-center"
         >
           {/* Badge Status */}
@@ -104,11 +105,12 @@ export function HeroSection() {
           </motion.div>
 
           {/* Headline Utama 
-            Putih murni dihapus, diganti dengan gradasi Zinc (Silver) dan Amber (Emas)
+            FIX: text-5xl diubah jadi text-4xl untuk ukuran paling kecil (mobile 390px)
+            agar tidak terpotong keluar layar.
           */}
           <motion.h1
             variants={itemVariants}
-            className="text-5xl font-black tracking-tighter sm:text-7xl md:text-8xl lg:text-[7.5rem] lg:leading-[1.05]"
+            className="text-4xl font-black tracking-tighter sm:text-6xl md:text-7xl lg:text-[7.5rem] lg:leading-[1.05]"
           >
             <span className="bg-gradient-to-b from-zinc-100 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(244,244,245,0.1)]">
               Crafting digital
@@ -119,7 +121,6 @@ export function HeroSection() {
             </span>
           </motion.h1>
 
-          {/* Teks paragraf menggunakan zinc-300 (abu-abu terang) */}
           <motion.p
             variants={itemVariants}
             className="mt-8 max-w-2xl text-lg font-medium leading-relaxed text-zinc-400 md:text-xl"
@@ -134,7 +135,6 @@ export function HeroSection() {
             variants={itemVariants}
             className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
-            {/* Tombol dengan warna zinc-200 (Bukan pure white) */}
             <ButtonLink
               href="#projects"
               className="group rounded-full bg-zinc-200 px-8 text-zinc-950 shadow-[0_0_30px_rgba(228,228,231,0.15)] transition-all hover:scale-105 hover:bg-zinc-100"

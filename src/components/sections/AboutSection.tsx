@@ -35,7 +35,8 @@ export function AboutSection() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              // FIX: Animasi diputar 1x saja, trigger margin -50px agar pasti muncul
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="sticky top-28"
             >
@@ -67,7 +68,8 @@ export function AboutSection() {
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
+              // FIX: Sama seperti di atas, mengatasi bug nyangkut di opacity 0
+              viewport={{ once: true, margin: "-50px" }}
               className="flex flex-col gap-10"
             >
               {/* Paragraf Utama Profile */}
