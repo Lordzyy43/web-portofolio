@@ -9,13 +9,15 @@ export const size = {
 export const contentType = "image/png";
 
 type ProjectImageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export default function Image({ params }: ProjectImageProps) {
-  const project = getProjectBySlug(params.slug);
+export default async function Image({ params }: ProjectImageProps) {
+  // FIX: Menggunakan await untuk params di Next.js 15
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   // Tampilan OG Image jika project tidak ditemukan (Fallback)
   if (!project) {
@@ -35,7 +37,7 @@ export default function Image({ params }: ProjectImageProps) {
           fontWeight: 700,
         }}
       >
-        Project case study
+        Project Case Study
       </div>,
       { ...size },
     );
@@ -81,18 +83,18 @@ export default function Image({ params }: ProjectImageProps) {
           zIndex: 1,
         }}
       >
-        {/* Badge Kategori */}
+        {/* Badge Kategori dengan Sentuhan Amber */}
         <div
           style={{
             display: "flex",
             alignSelf: "flex-start",
             borderRadius: "999px",
-            border: "1px solid #3f3f46", // zinc-700
-            background: "#18181b", // zinc-900
+            border: "1px solid rgba(251, 191, 36, 0.3)", // amber border
+            background: "rgba(251, 191, 36, 0.1)", // amber glow
             padding: "8px 20px",
             fontSize: "20px",
             fontWeight: 600,
-            color: "#e4e4e7", // zinc-200
+            color: "#fcd34d", // amber-300
             letterSpacing: "0.02em",
             textTransform: "capitalize",
           }}

@@ -24,6 +24,7 @@ export function Navbar() {
 
   useEffect(() => {
     setIsMounted(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -36,10 +37,38 @@ export function Navbar() {
     }
   });
 
+  // FUNGSI BARU: Mencegat lompatan instan Next.js dan menggantinya dengan Smooth Scroll
+  const handleScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    // Menangani link section (misal: /#about, #skills)
+    if (href.startsWith("#") || href.startsWith("/#")) {
+      e.preventDefault();
+
+      const targetId = href.replace(/.*#/, ""); // Mengambil nama ID setelah tanda #
+
+      if (targetId) {
+        const elem = document.getElementById(targetId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: "smooth" });
+          window.history.pushState(null, "", href);
+        }
+      }
+      setIsOpen(false); // Otomatis tutup menu mobile jika sedang terbuka
+    }
+    // Menangani link Home ("/") untuk scroll mulus ke paling atas
+    else if (href === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.pushState(null, "", href);
+      setIsOpen(false);
+    }
+  };
+
   if (!isMounted) return null;
 
   // Memisahkan navLinks menjadi kiri dan kanan agar logo bisa di tengah persis
-  // Asumsi navLinks ada 4 (Home, About, Projects, Contact)
   const midIndex = Math.ceil(navLinks.length / 2);
   const leftLinks = navLinks.slice(0, midIndex);
   const rightLinks = navLinks.slice(midIndex);
@@ -63,6 +92,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleScroll(e, link.href)} // FIX: Pasang handleScroll
                 className="relative px-4 py-2 font-medium transition-colors"
               >
                 <span
@@ -87,9 +117,10 @@ export function Navbar() {
           })}
         </div>
 
-        {/* Logo (Tengah) */}
+        {/* Logo Desktop (Tengah) */}
         <Link
           href="/"
+          onClick={(e) => handleScroll(e, "/")} // FIX: Pasang handleScroll agar mulus ke atas
           className="relative z-10 mx-2 flex items-center justify-center text-lg font-extrabold tracking-tight text-zinc-50 transition-transform hover:scale-105"
         >
           {profile.name}
@@ -104,6 +135,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleScroll(e, link.href)} // FIX: Pasang handleScroll
                 className="relative px-4 py-2 font-medium transition-colors"
               >
                 <span
@@ -130,14 +162,15 @@ export function Navbar() {
       </nav>
 
       {/* 
-        MOBILE NAVBAR: Tetap sama, karena di HP logo memang harus di kiri/tengah dan hamburger di kanan
+        MOBILE NAVBAR
       */}
       <div className="flex w-full flex-col md:hidden">
         <nav className="flex w-full items-center justify-between rounded-full border border-zinc-800/60 bg-zinc-950/70 px-4 py-2 shadow-2xl backdrop-blur-xl">
+          {/* Logo Mobile */}
           <Link
             href="/"
+            onClick={(e) => handleScroll(e, "/")} // FIX: Pasang handleScroll
             className="pl-2 text-lg font-bold tracking-tight text-zinc-50"
-            onClick={() => setIsOpen(false)}
           >
             {profile.name}
             <span className="text-zinc-500">.</span>
@@ -191,7 +224,7 @@ export function Navbar() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      onClick={() => setIsOpen(false)}
+                      onClick={(e) => handleScroll(e, link.href)} // FIX: Pasang handleScroll
                       className={cn(
                         "block rounded-2xl px-4 py-3 text-sm font-medium transition-all active:scale-95",
                         isActive
